@@ -259,8 +259,9 @@ class LoadingButton(ipw.Button):
         super().__init__(*args, **kwargs)
         self.add_traits(loading=tra.Bool())
         self.loading = False
-        self.observe(self.updateicon, names='loading')
         self.org_icon = self.icon
+        self.observe(self.updateicon, names='loading')
+        self.observe(self.updateorgicon, names='icon')
     
     def startloading(self, *args) -> None:
         '''
@@ -305,7 +306,7 @@ class LoadingButton(ipw.Button):
             change (tra.Bool): Widget event.
         '''
         self.startloading() if change.new else self.stoploading()
-        
+    
     def _handle_button_msg(self, *args, **kwargs) -> None:
         '''
         self._handle_button_msg(*args, **kwargs) -> None
@@ -327,7 +328,11 @@ class LoadingButton(ipw.Button):
         self.startloading()
         super()._handle_button_msg(*args, **kwargs)
         self.stoploading()
-        
+    
+    def updateorgicon(self, change: tra.Bunch):
+        if change.new != self.loading_icon:
+            self.org_icon = change.new
+            
 class ClearButton(LoadingButton):
     '''
     ClearButton(output: ipw.Output, **kwargs)
@@ -347,7 +352,7 @@ class ClearButton(LoadingButton):
         
         kwargs['description'] = kwargs.setdefault('description', 'clear')
         kwargs['icon'] = kwargs.setdefault('icon', 'close')
-        kwargs['button_style'] = kwargs.setdefault('button_style', 'danger')
+#         kwargs['button_style'] = kwargs.setdefault('button_style', 'danger')
         
         super().__init__(**kwargs)
         
@@ -378,7 +383,76 @@ class UpdateButton(LoadingButton):
     def __init__(self, **kwargs):
         kwargs['description'] = kwargs.setdefault('description', 'update')
         kwargs['icon'] = kwargs.setdefault('icon', 'refresh')
-        kwargs['button_style'] = kwargs.setdefault('button_style', 'info')
+#         kwargs['button_style'] = kwargs.setdefault('button_style', 'info')
         
         super().__init__(**kwargs)
+
+class PausePlayButton(ipw.Button):
+    '''
+    PausePlayButton(start: bool=True, **kwargs)
+    
+    Child of the ipw.Button class which changes its icon from/to
+    pause/play directly before ending its response to being clicked.
+    
+    Parmeters:
+    ----------
+        start (bool): Initalise with the pause icon.
+        **kwargs: Key word arguments passed to the ipw.Button
+            constructor.
+    '''
+    pause_icon = 'pause'
+    play_icon = 'play'
+    
+    def __init__(self, start: bool=True, **kwargs):
+        kwargs['icon'] = kwargs.setdefault(
+            'icon', (self.pause_icon, self.play_icon)[start]
+        )
+        
+        super().__init__(**kwargs)
+        self.paused = not start
+        
+    def pause(self) -> None:
+        '''
+        self.pause() -> None
+        
+        Set 'icon' trait to ``self.pause_icon`` and 'paused' to 
+        True.
+        '''
+        self.icon = self.pause_icon
+        self.paused = True
+        
+    def play(self) -> None:
+        '''
+        self.play() -> None
+        
+        Set 'icon' trait to ``self.play_icon`` and 'paused' to 
+        False.
+        '''
+        self.icon = self.play_icon
+        self.paused = False
+        
+    def _handle_button_msg(self, *args, **kwargs) -> None:
+        '''
+        self._handle_button_msg(*args, **kwargs) -> None
+        
+        Wrapper around ``super()._hanel_button_msg``. Sets the
+        button icon to either 'play' or 'pause' once the parent
+        function has finished running.
+        
+        See ``ipw.Button._handle_button_msg``, ``self.play``
+        and ``self.pause`` for more infomation.
+        
+        Parameters:
+        -----------
+            *args: Positional arguments passed to
+                ``super()._hanel_button_msg``.
+            **kwargs: Key word arguments passed to
+                ``super()._hanel_button_msg``
+        '''
+        super()._handle_button_msg(*args, **kwargs)
+        self.play() if self.paused else self.pause()
+        
+        
+        
+        
         

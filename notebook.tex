@@ -1,0 +1,521 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{viewing\_current\_enviroment\_demo}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{sys}
+        \PY{n}{sys}\PY{o}{.}\PY{n}{path}\PY{o}{.}\PY{n}{insert}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{..}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \subsection{Interfacing with the Running
+Enviroment}\label{interfacing-with-the-running-enviroment}
+
+\paragraph{By the end of this demo, you should be able to do the
+following:}\label{by-the-end-of-this-demo-you-should-be-able-to-do-the-following}
+
+1 - Expose variables in the current enviroment as a pandas DataFrame
+using the \texttt{EnvHandeler} class.
+
+2 - Expose variables in the current enviroment as an ipython widget
+using the \texttt{WidgetEnv} class.
+
+3 - Expose variables in the current enviroment as an ipython widget
+which updates itself periodically using the \texttt{AutoWidgetEnv}
+class.
+
+4 - Use the common \texttt{update} method to update an instance of each
+of these classes when the enviroment changes.
+
+    \subsubsection{Import classes and
+functions}\label{import-classes-and-functions}
+
+\begin{itemize}
+\tightlist
+\item
+  \texttt{getmain} is a function wich returns an instance of the current
+  enviroment (\texttt{\_\_main\_\_})
+\end{itemize}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k+kn}{from} \PY{n+nn}{env\PYZus{}explore} \PY{k}{import} \PY{n}{getmain}\PY{p}{,} \PY{n}{EnvHandeler}\PY{p}{,} \PY{n}{WidgetEnv}\PY{p}{,} \PY{n}{AutoWidgetEnv}
+\end{Verbatim}
+
+
+    \subsubsection{The current envirmoment can be specified with the 'name'
+argument}\label{the-current-envirmoment-can-be-specified-with-the-name-argument}
+
+The \texttt{name} argument is the name by which the object can be
+referenced (or generated) in the main enviroment. Setting this to
+\texttt{\textquotesingle{}getmain()\textquotesingle{}} means that the
+EnvHandeler instance will be initialised and updated from the current
+enviroment.
+
+    \paragraph{\texorpdfstring{1 -
+\texttt{EnvHandeler}}{1 - EnvHandeler}}\label{envhandeler}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{eh} \PY{o}{=} \PY{n}{EnvHandeler}\PY{p}{(}
+            \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{getmain()}\PY{l+s+s1}{\PYZsq{}}
+        \PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{\texorpdfstring{2 -
+\texttt{WidgetEnv}}{2 - WidgetEnv}}\label{widgetenv}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{we} \PY{o}{=} \PY{n}{WidgetEnv}\PY{p}{(}
+            \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{getmain()}\PY{l+s+s1}{\PYZsq{}}
+        \PY{p}{)}
+\end{Verbatim}
+
+
+    \paragraph{\texorpdfstring{3 -
+\texttt{AutoWidgetEnv}}{3 - AutoWidgetEnv}}\label{autowidgetenv}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{awe} \PY{o}{=} \PY{n}{AutoWidgetEnv}\PY{p}{(}
+            \PY{n}{name}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{getmain()}\PY{l+s+s1}{\PYZsq{}}
+        \PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{display}\PY{p}{(}
+            \PY{n}{eh}\PY{p}{,}
+            \PY{n}{we}\PY{p}{,}
+            \PY{n}{awe}
+        \PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+                                                           Value  \
+Variable                                                           
+AutoWidgetEnv      <class 'env_explore.interface.AutoWidgetEnv'>   
+EnvHandeler         <class 'env_explore.processing.EnvHandeler'>   
+WidgetEnv              <class 'env_explore.interface.WidgetEnv'>   
+exit           <IPython.core.autocall.ZMQExitAutocall object ...   
+get_ipython    <bound method InteractiveShell.get_ipython of ...   
+getmain                        <function getmain at 0x10f6b6840>   
+quit           <IPython.core.autocall.ZMQExitAutocall object ...   
+sys                                    <module 'sys' (built-in)>   
+
+                                                          Type  \
+Variable                                                         
+AutoWidgetEnv      <class 'traitlets.traitlets.MetaHasTraits'>   
+EnvHandeler                                     <class 'type'>   
+WidgetEnv          <class 'traitlets.traitlets.MetaHasTraits'>   
+exit           <class 'IPython.core.autocall.ZMQExitAutocall'>   
+get_ipython                                   <class 'method'>   
+getmain                                     <class 'function'>   
+quit           <class 'IPython.core.autocall.ZMQExitAutocall'>   
+sys                                           <class 'module'>   
+
+                                                   Documentation  
+Variable                                                          
+AutoWidgetEnv  \n    AutoWidgetEnv(*args, interval: float=5, ...  
+EnvHandeler    \n    EnvHandeler(name:str, display_as:str='df...  
+WidgetEnv      \n    WidgetEnv(*args, **kwargs)\n    \n    Wi...  
+exit           Exit IPython. Autocallable, so it needn't be e...  
+get_ipython       Return the currently running IPython instance.  
+getmain        \n    getmain() -> module\n    \n    Returns t...  
+quit           Exit IPython. Autocallable, so it needn't be e...  
+sys            This module provides access to some objects us...  
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+WidgetEnv(children=(HBox(children=(Label(value='Variable', layout=Layout(width='150px')), Label(value='Value', layout=Layout(width='150px')), Label(value='Type', layout=Layout(width='150px')), Label(value='Documentation', layout=Layout(width='150px')))), HBox(children=(Label(value='AutoWidgetEnv', layout=Layout(width='100px')), WidgetCell(description='AutoWidgetEnv', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='AutoWidgetEnv'), WidgetCell(description='MetaHasTraits', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='MetaHasTraits'), WidgetCell(description="\n    AutoWidgetEnv(*args, interval: float=5, start: bool=True, **kwargs)\n    \n    Child class of ``WidgetEnv``.  Is able to automatically update itself\n    periodically in the background.\n    \n    See ``WidgetEnv`` for more infomation.\n    \n    Parameters:\n    -----------\n        *args: Positional arguments passed to the parent's constructor.\n        interval (float): Number of seconds between updates (default is 5).\n        start (bool): Weather to start automatic updates on initialisation.\n            ``self.start`` can be used to commence automatic updating after\n             the fact (default is True).\n        **kwargs: Key word arguments passed to the parent's constructor.\n    ", layout=Layout(width='150px'), style=ButtonStyle(), tooltip="\n    AutoWidgetEnv(*args, interval: float=5, start: bool=True, **kwargs)\n    \n    Child class of ``WidgetEnv``.  Is able to automatically update itself\n    periodically in the background.\n    \n    See ``WidgetEnv`` for more infomation.\n    \n    Parameters:\n    -----------\n        *args: Positional arguments passed to the parent's constructor.\n        interval (float): Number of seconds between updates (default is 5).\n        start (bool): Weather to start automatic updates on initialisation.\n            ``self.start`` can be used to commence automatic updating after\n             the fact (default is True).\n        **kwargs: Key word arguments passed to the parent's constructor.\n    "))), HBox(children=(Label(value='EnvHandeler', layout=Layout(width='100px')), WidgetCell(description='EnvHandeler', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='EnvHandeler'), WidgetCell(description='type', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='type'), WidgetCell(description="\n    EnvHandeler(name:str, display_as:str='df', **kwargs[dict_args: Iterable=[], \n        dict_kwargs: dict={}, df_args: Iterable=[], df_kwargs: dict={}, \n        html_args: Iterable=[], html_kwargs: dict={}])\n    \n    For processing and displaying the contents objects.\n    \n    Parameters:\n    -----------\n        name (str): Name by which the object can be referenced in the main \n            enviroment.\n        display_as (str): Name of the attribute to be displayed by the\n            ``_ipython_display_`` method (default = 'df').\n        **kwargs: Key word defaluts used by ``self.updatefromenv``\n            and other methods to update ``self.dicti``, ``self.df`` and\n            ``self.html``.\n                - dict_args (Iterable): Positional arguments for \n                    ``self.setdict`` (default = []).\n                - dict_kwargs (dict): Key word arguments for ``self.setdict`` \n                    (default = {}).\n                - df_args (Iterable): Positional arguments for ``self.setdf`` \n                    (default = []).\n                - df_kwargs (dict): Key word arguments for ``self.setdf`` \n                    (default = {}).\n                - html_args (Iterable): Positional arguments for \n                    ``self.sethtml`` (default = []).\n                - html_kwargs (dict): Key word arguments for ``self.sethtml`` \n                    (default = {}).        \n    ", layout=Layout(width='150px'), style=ButtonStyle(), tooltip="\n    EnvHandeler(name:str, display_as:str='df', **kwargs[dict_args: Iterable=[], \n        dict_kwargs: dict={}, df_args: Iterable=[], df_kwargs: dict={}, \n        html_args: Iterable=[], html_kwargs: dict={}])\n    \n    For processing and displaying the contents objects.\n    \n    Parameters:\n    -----------\n        name (str): Name by which the object can be referenced in the main \n            enviroment.\n        display_as (str): Name of the attribute to be displayed by the\n            ``_ipython_display_`` method (default = 'df').\n        **kwargs: Key word defaluts used by ``self.updatefromenv``\n            and other methods to update ``self.dicti``, ``self.df`` and\n            ``self.html``.\n                - dict_args (Iterable): Positional arguments for \n                    ``self.setdict`` (default = []).\n                - dict_kwargs (dict): Key word arguments for ``self.setdict`` \n                    (default = {}).\n                - df_args (Iterable): Positional arguments for ``self.setdf`` \n                    (default = []).\n                - df_kwargs (dict): Key word arguments for ``self.setdf`` \n                    (default = {}).\n                - html_args (Iterable): Positional arguments for \n                    ``self.sethtml`` (default = []).\n                - html_kwargs (dict): Key word arguments for ``self.sethtml`` \n                    (default = {}).        \n    "))), HBox(children=(Label(value='WidgetEnv', layout=Layout(width='100px')), WidgetCell(description='WidgetEnv', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='WidgetEnv'), WidgetCell(description='MetaHasTraits', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='MetaHasTraits'), WidgetCell(description='\n    WidgetEnv(*args, **kwargs)\n    \n    Widget for representing the EnvHandeler objects. It inherits from\n    the WidgetDf and EnvHandeler classes.\n    \n    See ``WidgetDf`` and ``EnvHandeler`` for more infomation.\n    \n    Parameters:\n    -----------\n        *args: Positional arguments used to initialise the EnvHandeler\n            parent.\n        **kwargs: Key word arguments used to initialise the EnvHandeler\n            parent.\n    ', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='\n    WidgetEnv(*args, **kwargs)\n    \n    Widget for representing the EnvHandeler objects. It inherits from\n    the WidgetDf and EnvHandeler classes.\n    \n    See ``WidgetDf`` and ``EnvHandeler`` for more infomation.\n    \n    Parameters:\n    -----------\n        *args: Positional arguments used to initialise the EnvHandeler\n            parent.\n        **kwargs: Key word arguments used to initialise the EnvHandeler\n            parent.\n    '))), HBox(children=(Label(value='exit', layout=Layout(width='100px')), WidgetCell(description='<IPython.core.autocall.ZMQExitAutocall object at 0x110b0e668>', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='<IPython.core.autocall.ZMQExitAutocall object at 0x110b0e668>'), WidgetCell(description='ZMQExitAutocall', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='ZMQExitAutocall'), WidgetCell(description="Exit IPython. Autocallable, so it needn't be explicitly called.\n    \n    Parameters\n    ----------\n    keep_kernel : bool\n      If True, leave the kernel alive. Otherwise, tell the kernel to exit too\n      (default).\n    ", layout=Layout(width='150px'), style=ButtonStyle(), tooltip="Exit IPython. Autocallable, so it needn't be explicitly called.\n    \n    Parameters\n    ----------\n    keep_kernel : bool\n      If True, leave the kernel alive. Otherwise, tell the kernel to exit too\n      (default).\n    "))), HBox(children=(Label(value='get_ipython', layout=Layout(width='100px')), WidgetCell(description='get_ipython', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='get_ipython'), WidgetCell(description='method', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='method'), WidgetCell(description='Return the currently running IPython instance.', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='Return the currently running IPython instance.'))), HBox(children=(Label(value='getmain', layout=Layout(width='100px')), WidgetCell(description='getmain', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='getmain'), WidgetCell(description='function', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='function'), WidgetCell(description='\n    getmain() -> module\n    \n    Returns the __main__ module.\n    ', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='\n    getmain() -> module\n    \n    Returns the __main__ module.\n    '))), HBox(children=(Label(value='quit', layout=Layout(width='100px')), WidgetCell(description='<IPython.core.autocall.ZMQExitAutocall object at 0x110b0e668>', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='<IPython.core.autocall.ZMQExitAutocall object at 0x110b0e668>'), WidgetCell(description='ZMQExitAutocall', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='ZMQExitAutocall'), WidgetCell(description="Exit IPython. Autocallable, so it needn't be explicitly called.\n    \n    Parameters\n    ----------\n    keep_kernel : bool\n      If True, leave the kernel alive. Otherwise, tell the kernel to exit too\n      (default).\n    ", layout=Layout(width='150px'), style=ButtonStyle(), tooltip="Exit IPython. Autocallable, so it needn't be explicitly called.\n    \n    Parameters\n    ----------\n    keep_kernel : bool\n      If True, leave the kernel alive. Otherwise, tell the kernel to exit too\n      (default).\n    "))), HBox(children=(Label(value='sys', layout=Layout(width='100px')), WidgetCell(description='sys', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='sys'), WidgetCell(description='module', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='module'), WidgetCell(description="This module provides access to some objects used or maintained by the\ninterpreter and to functions that interact strongly with the interpreter.\n\nDynamic objects:\n\nargv -- command line arguments; argv[0] is the script pathname if known\npath -- module search path; path[0] is the script directory, else ''\nmodules -- dictionary of loaded modules\n\ndisplayhook -- called to show results in an interactive session\nexcepthook -- called to handle any uncaught exception other than SystemExit\n  To customize printing in an interactive session or to install a custom\n  top-level exception handler, assign other functions to replace these.\n\nstdin -- standard input file object; used by input()\nstdout -- standard output file object; used by print()\nstderr -- standard error object; used for error messages\n  By assigning other file objects (or objects that behave like files)\n  to these, it is possible to redirect all of the interpreter's I/O.\n\nlast_type -- type of last uncaught exception\nlast_value -- value of last uncaught exception\nlast_traceback -- traceback of last uncaught exception\n  These three are only available in an interactive session after a\n  traceback has been printed.\n\nStatic objects:\n\nbuiltin_module_names -- tuple of module names built into this interpreter\ncopyright -- copyright notice pertaining to this interpreter\nexec_prefix -- prefix used to find the machine-specific Python library\nexecutable -- absolute path of the executable binary of the Python interpreter\nfloat_info -- a struct sequence with information about the float implementation.\nfloat_repr_style -- string indicating the style of repr() output for floats\nhash_info -- a struct sequence with information about the hash algorithm.\nhexversion -- version information encoded as a single integer\nimplementation -- Python implementation information.\nint_info -- a struct sequence with information about the int implementation.\nmaxsize -- the largest supported length of containers.\nmaxunicode -- the value of the largest Unicode code point\nplatform -- platform identifier\nprefix -- prefix used to find the Python library\nthread_info -- a struct sequence with information about the thread implementation.\nversion -- the version of this interpreter as a string\nversion_info -- version information as a named tuple\n__stdin__ -- the original stdin; don't touch!\n__stdout__ -- the original stdout; don't touch!\n__stderr__ -- the original stderr; don't touch!\n__displayhook__ -- the original displayhook; don't touch!\n__excepthook__ -- the original excepthook; don't touch!\n\nFunctions:\n\ndisplayhook() -- print an object to the screen, and save it in builtins._\nexcepthook() -- print an exception and its traceback to sys.stderr\nexc_info() -- return thread-safe information about the current exception\nexit() -- exit the interpreter by raising SystemExit\ngetdlopenflags() -- returns flags to be used for dlopen() calls\ngetprofile() -- get the global profiling function\ngetrefcount() -- return the reference count for an object (plus one :-)\ngetrecursionlimit() -- return the max recursion depth for the interpreter\ngetsizeof() -- return the size of an object in bytes\ngettrace() -- get the global debug tracing function\nsetcheckinterval() -- control how often the interpreter checks for events\nsetdlopenflags() -- set the flags to be used for dlopen() calls\nsetprofile() -- set the global profiling function\nsetrecursionlimit() -- set the max recursion depth for the interpreter\nsettrace() -- set the global debug tracing function\n", layout=Layout(width='150px'), style=ButtonStyle(), tooltip="This module provides access to some objects used or maintained by the\ninterpreter and to functions that interact strongly with the interpreter.\n\nDynamic objects:\n\nargv -- command line arguments; argv[0] is the script pathname if known\npath -- module search path; path[0] is the script directory, else ''\nmodules -- dictionary of loaded modules\n\ndisplayhook -- called to show results in an interactive session\nexcepthook -- called to handle any uncaught exception other than SystemExit\n  To customize printing in an interactive session or to install a custom\n  top-level exception handler, assign other functions to replace these.\n\nstdin -- standard input file object; used by input()\nstdout -- standard output file object; used by print()\nstderr -- standard error object; used for error messages\n  By assigning other file objects (or objects that behave like files)\n  to these, it is possible to redirect all of the interpreter's I/O.\n\nlast_type -- type of last uncaught exception\nlast_value -- value of last uncaught exception\nlast_traceback -- traceback of last uncaught exception\n  These three are only available in an interactive session after a\n  traceback has been printed.\n\nStatic objects:\n\nbuiltin_module_names -- tuple of module names built into this interpreter\ncopyright -- copyright notice pertaining to this interpreter\nexec_prefix -- prefix used to find the machine-specific Python library\nexecutable -- absolute path of the executable binary of the Python interpreter\nfloat_info -- a struct sequence with information about the float implementation.\nfloat_repr_style -- string indicating the style of repr() output for floats\nhash_info -- a struct sequence with information about the hash algorithm.\nhexversion -- version information encoded as a single integer\nimplementation -- Python implementation information.\nint_info -- a struct sequence with information about the int implementation.\nmaxsize -- the largest supported length of containers.\nmaxunicode -- the value of the largest Unicode code point\nplatform -- platform identifier\nprefix -- prefix used to find the Python library\nthread_info -- a struct sequence with information about the thread implementation.\nversion -- the version of this interpreter as a string\nversion_info -- version information as a named tuple\n__stdin__ -- the original stdin; don't touch!\n__stdout__ -- the original stdout; don't touch!\n__stderr__ -- the original stderr; don't touch!\n__displayhook__ -- the original displayhook; don't touch!\n__excepthook__ -- the original excepthook; don't touch!\n\nFunctions:\n\ndisplayhook() -- print an object to the screen, and save it in builtins._\nexcepthook() -- print an exception and its traceback to sys.stderr\nexc_info() -- return thread-safe information about the current exception\nexit() -- exit the interpreter by raising SystemExit\ngetdlopenflags() -- returns flags to be used for dlopen() calls\ngetprofile() -- get the global profiling function\ngetrefcount() -- return the reference count for an object (plus one :-)\ngetrecursionlimit() -- return the max recursion depth for the interpreter\ngetsizeof() -- return the size of an object in bytes\ngettrace() -- get the global debug tracing function\nsetcheckinterval() -- control how often the interpreter checks for events\nsetdlopenflags() -- set the flags to be used for dlopen() calls\nsetprofile() -- set the global profiling function\nsetrecursionlimit() -- set the max recursion depth for the interpreter\nsettrace() -- set the global debug tracing function\n")))))
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+HBox(children=(ClearButton(description='clear', icon='close', style=ButtonStyle()), UpdateButton(description='update', icon='refresh', style=ButtonStyle())))
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+Output()
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+AutoWidgetEnv(children=(HBox(children=(Label(value='Variable', layout=Layout(width='150px')), Label(value='Value', layout=Layout(width='150px')), Label(value='Type', layout=Layout(width='150px')), Label(value='Documentation', layout=Layout(width='150px')))), HBox(children=(Label(value='AutoWidgetEnv', layout=Layout(width='100px')), WidgetCell(description='AutoWidgetEnv', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='AutoWidgetEnv'), WidgetCell(description='MetaHasTraits', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='MetaHasTraits'), WidgetCell(description="\n    AutoWidgetEnv(*args, interval: float=5, start: bool=True, **kwargs)\n    \n    Child class of ``WidgetEnv``.  Is able to automatically update itself\n    periodically in the background.\n    \n    See ``WidgetEnv`` for more infomation.\n    \n    Parameters:\n    -----------\n        *args: Positional arguments passed to the parent's constructor.\n        interval (float): Number of seconds between updates (default is 5).\n        start (bool): Weather to start automatic updates on initialisation.\n            ``self.start`` can be used to commence automatic updating after\n             the fact (default is True).\n        **kwargs: Key word arguments passed to the parent's constructor.\n    ", layout=Layout(width='150px'), style=ButtonStyle(), tooltip="\n    AutoWidgetEnv(*args, interval: float=5, start: bool=True, **kwargs)\n    \n    Child class of ``WidgetEnv``.  Is able to automatically update itself\n    periodically in the background.\n    \n    See ``WidgetEnv`` for more infomation.\n    \n    Parameters:\n    -----------\n        *args: Positional arguments passed to the parent's constructor.\n        interval (float): Number of seconds between updates (default is 5).\n        start (bool): Weather to start automatic updates on initialisation.\n            ``self.start`` can be used to commence automatic updating after\n             the fact (default is True).\n        **kwargs: Key word arguments passed to the parent's constructor.\n    "))), HBox(children=(Label(value='EnvHandeler', layout=Layout(width='100px')), WidgetCell(description='EnvHandeler', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='EnvHandeler'), WidgetCell(description='type', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='type'), WidgetCell(description="\n    EnvHandeler(name:str, display_as:str='df', **kwargs[dict_args: Iterable=[], \n        dict_kwargs: dict={}, df_args: Iterable=[], df_kwargs: dict={}, \n        html_args: Iterable=[], html_kwargs: dict={}])\n    \n    For processing and displaying the contents objects.\n    \n    Parameters:\n    -----------\n        name (str): Name by which the object can be referenced in the main \n            enviroment.\n        display_as (str): Name of the attribute to be displayed by the\n            ``_ipython_display_`` method (default = 'df').\n        **kwargs: Key word defaluts used by ``self.updatefromenv``\n            and other methods to update ``self.dicti``, ``self.df`` and\n            ``self.html``.\n                - dict_args (Iterable): Positional arguments for \n                    ``self.setdict`` (default = []).\n                - dict_kwargs (dict): Key word arguments for ``self.setdict`` \n                    (default = {}).\n                - df_args (Iterable): Positional arguments for ``self.setdf`` \n                    (default = []).\n                - df_kwargs (dict): Key word arguments for ``self.setdf`` \n                    (default = {}).\n                - html_args (Iterable): Positional arguments for \n                    ``self.sethtml`` (default = []).\n                - html_kwargs (dict): Key word arguments for ``self.sethtml`` \n                    (default = {}).        \n    ", layout=Layout(width='150px'), style=ButtonStyle(), tooltip="\n    EnvHandeler(name:str, display_as:str='df', **kwargs[dict_args: Iterable=[], \n        dict_kwargs: dict={}, df_args: Iterable=[], df_kwargs: dict={}, \n        html_args: Iterable=[], html_kwargs: dict={}])\n    \n    For processing and displaying the contents objects.\n    \n    Parameters:\n    -----------\n        name (str): Name by which the object can be referenced in the main \n            enviroment.\n        display_as (str): Name of the attribute to be displayed by the\n            ``_ipython_display_`` method (default = 'df').\n        **kwargs: Key word defaluts used by ``self.updatefromenv``\n            and other methods to update ``self.dicti``, ``self.df`` and\n            ``self.html``.\n                - dict_args (Iterable): Positional arguments for \n                    ``self.setdict`` (default = []).\n                - dict_kwargs (dict): Key word arguments for ``self.setdict`` \n                    (default = {}).\n                - df_args (Iterable): Positional arguments for ``self.setdf`` \n                    (default = []).\n                - df_kwargs (dict): Key word arguments for ``self.setdf`` \n                    (default = {}).\n                - html_args (Iterable): Positional arguments for \n                    ``self.sethtml`` (default = []).\n                - html_kwargs (dict): Key word arguments for ``self.sethtml`` \n                    (default = {}).        \n    "))), HBox(children=(Label(value='WidgetEnv', layout=Layout(width='100px')), WidgetCell(description='WidgetEnv', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='WidgetEnv'), WidgetCell(description='MetaHasTraits', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='MetaHasTraits'), WidgetCell(description='\n    WidgetEnv(*args, **kwargs)\n    \n    Widget for representing the EnvHandeler objects. It inherits from\n    the WidgetDf and EnvHandeler classes.\n    \n    See ``WidgetDf`` and ``EnvHandeler`` for more infomation.\n    \n    Parameters:\n    -----------\n        *args: Positional arguments used to initialise the EnvHandeler\n            parent.\n        **kwargs: Key word arguments used to initialise the EnvHandeler\n            parent.\n    ', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='\n    WidgetEnv(*args, **kwargs)\n    \n    Widget for representing the EnvHandeler objects. It inherits from\n    the WidgetDf and EnvHandeler classes.\n    \n    See ``WidgetDf`` and ``EnvHandeler`` for more infomation.\n    \n    Parameters:\n    -----------\n        *args: Positional arguments used to initialise the EnvHandeler\n            parent.\n        **kwargs: Key word arguments used to initialise the EnvHandeler\n            parent.\n    '))), HBox(children=(Label(value='exit', layout=Layout(width='100px')), WidgetCell(description='<IPython.core.autocall.ZMQExitAutocall object at 0x110b0e668>', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='<IPython.core.autocall.ZMQExitAutocall object at 0x110b0e668>'), WidgetCell(description='ZMQExitAutocall', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='ZMQExitAutocall'), WidgetCell(description="Exit IPython. Autocallable, so it needn't be explicitly called.\n    \n    Parameters\n    ----------\n    keep_kernel : bool\n      If True, leave the kernel alive. Otherwise, tell the kernel to exit too\n      (default).\n    ", layout=Layout(width='150px'), style=ButtonStyle(), tooltip="Exit IPython. Autocallable, so it needn't be explicitly called.\n    \n    Parameters\n    ----------\n    keep_kernel : bool\n      If True, leave the kernel alive. Otherwise, tell the kernel to exit too\n      (default).\n    "))), HBox(children=(Label(value='get_ipython', layout=Layout(width='100px')), WidgetCell(description='get_ipython', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='get_ipython'), WidgetCell(description='method', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='method'), WidgetCell(description='Return the currently running IPython instance.', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='Return the currently running IPython instance.'))), HBox(children=(Label(value='getmain', layout=Layout(width='100px')), WidgetCell(description='getmain', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='getmain'), WidgetCell(description='function', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='function'), WidgetCell(description='\n    getmain() -> module\n    \n    Returns the __main__ module.\n    ', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='\n    getmain() -> module\n    \n    Returns the __main__ module.\n    '))), HBox(children=(Label(value='quit', layout=Layout(width='100px')), WidgetCell(description='<IPython.core.autocall.ZMQExitAutocall object at 0x110b0e668>', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='<IPython.core.autocall.ZMQExitAutocall object at 0x110b0e668>'), WidgetCell(description='ZMQExitAutocall', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='ZMQExitAutocall'), WidgetCell(description="Exit IPython. Autocallable, so it needn't be explicitly called.\n    \n    Parameters\n    ----------\n    keep_kernel : bool\n      If True, leave the kernel alive. Otherwise, tell the kernel to exit too\n      (default).\n    ", layout=Layout(width='150px'), style=ButtonStyle(), tooltip="Exit IPython. Autocallable, so it needn't be explicitly called.\n    \n    Parameters\n    ----------\n    keep_kernel : bool\n      If True, leave the kernel alive. Otherwise, tell the kernel to exit too\n      (default).\n    "))), HBox(children=(Label(value='sys', layout=Layout(width='100px')), WidgetCell(description='sys', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='sys'), WidgetCell(description='module', layout=Layout(width='150px'), style=ButtonStyle(), tooltip='module'), WidgetCell(description="This module provides access to some objects used or maintained by the\ninterpreter and to functions that interact strongly with the interpreter.\n\nDynamic objects:\n\nargv -- command line arguments; argv[0] is the script pathname if known\npath -- module search path; path[0] is the script directory, else ''\nmodules -- dictionary of loaded modules\n\ndisplayhook -- called to show results in an interactive session\nexcepthook -- called to handle any uncaught exception other than SystemExit\n  To customize printing in an interactive session or to install a custom\n  top-level exception handler, assign other functions to replace these.\n\nstdin -- standard input file object; used by input()\nstdout -- standard output file object; used by print()\nstderr -- standard error object; used for error messages\n  By assigning other file objects (or objects that behave like files)\n  to these, it is possible to redirect all of the interpreter's I/O.\n\nlast_type -- type of last uncaught exception\nlast_value -- value of last uncaught exception\nlast_traceback -- traceback of last uncaught exception\n  These three are only available in an interactive session after a\n  traceback has been printed.\n\nStatic objects:\n\nbuiltin_module_names -- tuple of module names built into this interpreter\ncopyright -- copyright notice pertaining to this interpreter\nexec_prefix -- prefix used to find the machine-specific Python library\nexecutable -- absolute path of the executable binary of the Python interpreter\nfloat_info -- a struct sequence with information about the float implementation.\nfloat_repr_style -- string indicating the style of repr() output for floats\nhash_info -- a struct sequence with information about the hash algorithm.\nhexversion -- version information encoded as a single integer\nimplementation -- Python implementation information.\nint_info -- a struct sequence with information about the int implementation.\nmaxsize -- the largest supported length of containers.\nmaxunicode -- the value of the largest Unicode code point\nplatform -- platform identifier\nprefix -- prefix used to find the Python library\nthread_info -- a struct sequence with information about the thread implementation.\nversion -- the version of this interpreter as a string\nversion_info -- version information as a named tuple\n__stdin__ -- the original stdin; don't touch!\n__stdout__ -- the original stdout; don't touch!\n__stderr__ -- the original stderr; don't touch!\n__displayhook__ -- the original displayhook; don't touch!\n__excepthook__ -- the original excepthook; don't touch!\n\nFunctions:\n\ndisplayhook() -- print an object to the screen, and save it in builtins._\nexcepthook() -- print an exception and its traceback to sys.stderr\nexc_info() -- return thread-safe information about the current exception\nexit() -- exit the interpreter by raising SystemExit\ngetdlopenflags() -- returns flags to be used for dlopen() calls\ngetprofile() -- get the global profiling function\ngetrefcount() -- return the reference count for an object (plus one :-)\ngetrecursionlimit() -- return the max recursion depth for the interpreter\ngetsizeof() -- return the size of an object in bytes\ngettrace() -- get the global debug tracing function\nsetcheckinterval() -- control how often the interpreter checks for events\nsetdlopenflags() -- set the flags to be used for dlopen() calls\nsetprofile() -- set the global profiling function\nsetrecursionlimit() -- set the max recursion depth for the interpreter\nsettrace() -- set the global debug tracing function\n", layout=Layout(width='150px'), style=ButtonStyle(), tooltip="This module provides access to some objects used or maintained by the\ninterpreter and to functions that interact strongly with the interpreter.\n\nDynamic objects:\n\nargv -- command line arguments; argv[0] is the script pathname if known\npath -- module search path; path[0] is the script directory, else ''\nmodules -- dictionary of loaded modules\n\ndisplayhook -- called to show results in an interactive session\nexcepthook -- called to handle any uncaught exception other than SystemExit\n  To customize printing in an interactive session or to install a custom\n  top-level exception handler, assign other functions to replace these.\n\nstdin -- standard input file object; used by input()\nstdout -- standard output file object; used by print()\nstderr -- standard error object; used for error messages\n  By assigning other file objects (or objects that behave like files)\n  to these, it is possible to redirect all of the interpreter's I/O.\n\nlast_type -- type of last uncaught exception\nlast_value -- value of last uncaught exception\nlast_traceback -- traceback of last uncaught exception\n  These three are only available in an interactive session after a\n  traceback has been printed.\n\nStatic objects:\n\nbuiltin_module_names -- tuple of module names built into this interpreter\ncopyright -- copyright notice pertaining to this interpreter\nexec_prefix -- prefix used to find the machine-specific Python library\nexecutable -- absolute path of the executable binary of the Python interpreter\nfloat_info -- a struct sequence with information about the float implementation.\nfloat_repr_style -- string indicating the style of repr() output for floats\nhash_info -- a struct sequence with information about the hash algorithm.\nhexversion -- version information encoded as a single integer\nimplementation -- Python implementation information.\nint_info -- a struct sequence with information about the int implementation.\nmaxsize -- the largest supported length of containers.\nmaxunicode -- the value of the largest Unicode code point\nplatform -- platform identifier\nprefix -- prefix used to find the Python library\nthread_info -- a struct sequence with information about the thread implementation.\nversion -- the version of this interpreter as a string\nversion_info -- version information as a named tuple\n__stdin__ -- the original stdin; don't touch!\n__stdout__ -- the original stdout; don't touch!\n__stderr__ -- the original stderr; don't touch!\n__displayhook__ -- the original displayhook; don't touch!\n__excepthook__ -- the original excepthook; don't touch!\n\nFunctions:\n\ndisplayhook() -- print an object to the screen, and save it in builtins._\nexcepthook() -- print an exception and its traceback to sys.stderr\nexc_info() -- return thread-safe information about the current exception\nexit() -- exit the interpreter by raising SystemExit\ngetdlopenflags() -- returns flags to be used for dlopen() calls\ngetprofile() -- get the global profiling function\ngetrefcount() -- return the reference count for an object (plus one :-)\ngetrecursionlimit() -- return the max recursion depth for the interpreter\ngetsizeof() -- return the size of an object in bytes\ngettrace() -- get the global debug tracing function\nsetcheckinterval() -- control how often the interpreter checks for events\nsetdlopenflags() -- set the flags to be used for dlopen() calls\nsetprofile() -- set the global profiling function\nsetrecursionlimit() -- set the max recursion depth for the interpreter\nsettrace() -- set the global debug tracing function\n")))))
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+HBox(children=(ClearButton(description='clear', icon='close', style=ButtonStyle()), UpdateButton(description='update', icon='refresh', style=ButtonStyle()), PausePlayButton(icon='pause', style=ButtonStyle())))
+    \end{verbatim}
+
+    
+    
+    \begin{verbatim}
+Output()
+    \end{verbatim}
+
+    
+    \paragraph{\texorpdfstring{4 -
+\texttt{update}}{4 - update}}\label{update}
+
+The \texttt{update} method is defined for each of the mentioned classes.
+
+It sets the backend value of the object to the result of evaluating the
+\texttt{name} attribute
+(\texttt{\textquotesingle{}getmain()\textquotesingle{}} above) in the
+current enviroment and recaluclates other attributes accordingly.
+
+For the \texttt{AutoWidgetEnv} class, this is done periodically in the
+backgroud and can also be done for both the \texttt{WidgetEnv} and
+\texttt{AutoWidgetEnv} classes manually by clicking the update button.
+
+For the \texttt{WidgetEnv} and \texttt{AutoWidgetEnv} classes, changes
+should be reflected in the objects whilst they are being displayed.
+
+After running the following section, all the objects displayed above
+should have a row 'z' at the bottom.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{z} \PY{o}{=} \PY{l+m+mi}{5}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{we}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Changes should be reflected in the display above}
+        \PY{n}{awe}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{p}{)} \PY{c+c1}{\PYZsh{} Changes should be reflected in the display above}
+        \PY{n}{eh}\PY{o}{.}\PY{n}{update}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    
+    \begin{verbatim}
+                                                           Value  \
+Variable                                                           
+AutoWidgetEnv      <class 'env_explore.interface.AutoWidgetEnv'>   
+EnvHandeler         <class 'env_explore.processing.EnvHandeler'>   
+WidgetEnv              <class 'env_explore.interface.WidgetEnv'>   
+exit           <IPython.core.autocall.ZMQExitAutocall object ...   
+get_ipython    <bound method InteractiveShell.get_ipython of ...   
+getmain                        <function getmain at 0x10f6b6840>   
+quit           <IPython.core.autocall.ZMQExitAutocall object ...   
+sys                                    <module 'sys' (built-in)>   
+z                                                              5   
+
+                                                          Type  \
+Variable                                                         
+AutoWidgetEnv      <class 'traitlets.traitlets.MetaHasTraits'>   
+EnvHandeler                                     <class 'type'>   
+WidgetEnv          <class 'traitlets.traitlets.MetaHasTraits'>   
+exit           <class 'IPython.core.autocall.ZMQExitAutocall'>   
+get_ipython                                   <class 'method'>   
+getmain                                     <class 'function'>   
+quit           <class 'IPython.core.autocall.ZMQExitAutocall'>   
+sys                                           <class 'module'>   
+z                                                <class 'int'>   
+
+                                                   Documentation  
+Variable                                                          
+AutoWidgetEnv  \n    AutoWidgetEnv(*args, interval: float=5, ...  
+EnvHandeler    \n    EnvHandeler(name:str, display_as:str='df...  
+WidgetEnv      \n    WidgetEnv(*args, **kwargs)\n    \n    Wi...  
+exit           Exit IPython. Autocallable, so it needn't be e...  
+get_ipython       Return the currently running IPython instance.  
+getmain        \n    getmain() -> module\n    \n    Returns t...  
+quit           Exit IPython. Autocallable, so it needn't be e...  
+sys            This module provides access to some objects us...  
+z              int(x=0) -> integer\nint(x, base=10) -> intege...  
+    \end{verbatim}
+
+    
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

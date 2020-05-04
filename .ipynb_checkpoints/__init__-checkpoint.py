@@ -13,8 +13,9 @@ from .utils.backend import (getmain, envtodict, envtopandas, envtohtmltable,
 
 from .utils.frontend import (usename, hboxes, vboxes, arrange, ishtml,
                             showobj, runperiodic, runperiodicfactory, 
-                            Printed, HTMLCode, LoadingButton, ClearButton)
+                            Printed, HTMLCode, LoadingButton, ClearButton,
+                            PausePlayButton)
 
-from .processing import (EnvHandeler)
+from .processing import EnvHandler
 
 from .interface import (WidgetCell, WidgetDf, WidgetEnv, AutoWidgetEnv)
